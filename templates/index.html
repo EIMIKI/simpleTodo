@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>SimpleTodo</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../assets/main.css" type="text/css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>simpleTodo</h1>
+    <div class="add_todo">
+      <form action="/" method="post">
+        New Todo : <input name="new_todo" type="text" />
+        <input type="submit" value="Send" />
+      </form>
+    </div>
+    <div class="delete_todo">
+      <form action="/" method="POST">
+        <ul>
+          {{ range . }}
+          <div class="todo">
+
+            <label><li>
+
+            <input type="checkbox" name="delete[]" value="{{ .Id }}"/>
+            {{ .Todo }}
+          </li></label>
+          </div>
+          {{ end }}
+        </ul>
+        <input type="submit" value="Delete checked Todos" class="submit_d"/>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
