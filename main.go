@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -73,7 +74,9 @@ func postRoot(c *gin.Context) {
 }
 
 func openDB() *sql.DB {
-	db, err := sql.Open("mysql", "yourUsername:yourPassword@/todos")
+	dbuser := os.Getenv("DBUSER")
+	dbpass := os.Getenv("DBPASS")
+	db, err := sql.Open("mysql", ""+dbuser+":"+dbpass+"@/todos")
 	if err != nil {
 		log.Fatalln(err)
 	}
