@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetRoot(c *gin.Context) { //Getに対するレスポンス兼表示
+func ShowList(c *gin.Context) { //Getに対するレスポンス兼表示
 	showTodos := model.Select()
 	c.HTML(http.StatusOK, "index.html", showTodos)
 }
