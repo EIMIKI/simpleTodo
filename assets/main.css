@@ -23,8 +23,9 @@
 
 .delete_todo>form>ul{
   list-style: none;
+  display: inline;
+  word-wrap: break-word;
 }
-
 .warn{
   color: rgb(193, 93, 62)
 }

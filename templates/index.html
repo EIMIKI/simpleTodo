@@ -21,14 +21,14 @@
       <form action="/delete" method="POST">
         <ul>
           {{ range . }}
-          <div class="todo">
+          <label><div class="todo">
 
-            <label><li>
+            <li>
 
             <input type="checkbox" name="delete[]" value="{{ .Id }}"/>
             {{ .Todo }}
-          </li></label>
-          </div>
+          </li>
+          </div></label>
           {{ end }}
         </ul>
         <input type="submit" value="Delete checked Todos" class="submit_d"/>
