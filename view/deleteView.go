@@ -1,6 +1,7 @@
 package view
 
 import (
+	"net/http"
 	"simpleTodo/model"
 
 	"github.com/gin-gonic/gin"
@@ -11,5 +12,6 @@ func DeleteTodo(c *gin.Context) {
 	if c.ShouldBind(&delTodo) == nil {
 		model.DeleteTodo(delTodo)
 	}
-	GetRoot(c)
+	c.Redirect(http.StatusMovedPermanently, "/list")
+
 }

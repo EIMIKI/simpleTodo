@@ -1,6 +1,7 @@
 package view
 
 import (
+	"net/http"
 	"simpleTodo/model"
 
 	"github.com/gin-gonic/gin"
@@ -11,5 +12,5 @@ func AddTodo(c *gin.Context) {
 	if c.ShouldBind(&newTodo) == nil {
 		model.AddTodo(newTodo)
 	}
-	GetRoot(c)
+	c.Redirect(http.StatusMovedPermanently, "/list")
 }
