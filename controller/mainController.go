@@ -8,6 +8,7 @@ func Init() *gin.Engine {
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./assets")
 	r.GET("/", view.GetRoot)
-	r.POST("/", view.PostRoot)
+	r.POST("/add", view.AddTodo)
+	r.POST("/delete", view.DeleteTodo)
 	return r
 }
