@@ -21,5 +21,9 @@ func AddTodo(c *gin.Context) {
 }
 
 func DeleteTodo(c *gin.Context) {
-
+	var delTodo model.DelTodo
+	if c.ShouldBind(&delTodo) == nil {
+		model.DeleteTodo(delTodo)
+	}
+	GetRoot(c)
 }
