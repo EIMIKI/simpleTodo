@@ -8,22 +8,22 @@ import (
 	"strconv"
 )
 
-type ShowTodo struct {
+type ShowTodo struct { //表示用
 	Todo string
 	Id   int
 }
-type PostTodo struct {
+type PostTodo struct { //追加・削除用
 	Todo   string `form:"new_todo"`
 	Delete []int  `form:"delete[]"`
 }
 
-func getEnv() (string, string) {
+func getEnv() (string, string) { //環境変数の取得
 	dbuser := os.Getenv("DBUSER")
 	dbpass := os.Getenv("DBPASS")
 	return dbuser, dbpass
 }
 
-func openDB() *sql.DB {
+func openDB() *sql.DB { //データベースの接続
 	dbuser, dbpass := getEnv()
 	db, err := sql.Open("mysql", ""+dbuser+":"+dbpass+"@/todos")
 	if err != nil {
@@ -32,7 +32,7 @@ func openDB() *sql.DB {
 	return db
 }
 
-func Select() []ShowTodo {
+func Select() []ShowTodo { //表示用データの作成
 	showTodos := []ShowTodo{}
 	db := openDB()
 	defer db.Close()
@@ -52,7 +52,7 @@ func Select() []ShowTodo {
 	return showTodos
 }
 
-func ChangeData(postTodo PostTodo) {
+func ChangeData(postTodo PostTodo) { //データの削除・追加
 	db := openDB()
 	defer db.Close()
 	fmt.Println(postTodo.Todo)
