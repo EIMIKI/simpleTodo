@@ -12,11 +12,28 @@ type ShowTodo struct { //表示用
 	Todo string
 	Id   int
 }
+
 type PostTodo struct { //追加・削除用
 	Todo   string `form:"new_todo"`
 	Delete []int  `form:"delete[]"`
 }
 
+type NewTodo struct {
+	Todo string `form:"new_todo"`
+}
+
+func AddTodo(newTodo NewTodo) {
+	db := openDB()
+	defer db.Close()
+	fmt.Println(newTodo.Todo)
+	if newTodo.Todo != "" {
+		_, err := db.Exec("insert into todo(todo) values('" + newTodo.Todo + "');")
+		if err != nil {
+			log.Fatalln(err)
+
+		}
+	}
+}
 func getEnv() (string, string) { //環境変数の取得
 	dbuser := os.Getenv("DBUSER")
 	dbpass := os.Getenv("DBPASS")
@@ -55,15 +72,7 @@ func Select() []ShowTodo { //表示用データの作成
 func ChangeData(postTodo PostTodo) { //データの削除・追加
 	db := openDB()
 	defer db.Close()
-	fmt.Println(postTodo.Todo)
-	//新規TODOがある場合
-	if postTodo.Todo != "" {
-		_, err := db.Exec("insert into todo(todo) values('" + postTodo.Todo + "');")
-		if err != nil {
-			log.Fatalln(err)
 
-		}
-	}
 	//消去TODOがある場合
 	if postTodo.Delete != nil {
 		for _, v := range postTodo.Delete {

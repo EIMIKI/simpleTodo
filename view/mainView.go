@@ -12,10 +12,14 @@ func GetRoot(c *gin.Context) { //Getに対するレスポンス兼表示
 	c.HTML(http.StatusOK, "index.html", showTodos)
 }
 
-func PostRoot(c *gin.Context) { //Postに対する処理
-	var postTodo model.PostTodo
-	if c.ShouldBind(&postTodo) == nil {
-		model.ChangeData(postTodo)
+func AddTodo(c *gin.Context) {
+	var newTodo model.NewTodo
+	if c.ShouldBind(&newTodo) == nil {
+		model.AddTodo(newTodo)
 	}
 	GetRoot(c)
+}
+
+func DeleteTodo(c *gin.Context) {
+
 }
