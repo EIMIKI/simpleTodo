@@ -8,7 +8,7 @@
 }
 
 .todo{
-  background:lightgreen;
+  background:rgb(39, 184, 159);
   opacity: 0.8;
   border: 1px solid gray;
   border-radius: 10px;
@@ -17,11 +17,14 @@
 }
 
 .todo:hover{
-  background-color:lightgreen;
   opacity: 1;
   pointer-events: painted;
 }
 
 .delete_todo>form>ul{
   list-style: none;
+}
+
+.warn{
+  color: rgb(193, 93, 62)
 }
