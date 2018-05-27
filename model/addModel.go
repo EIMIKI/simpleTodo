@@ -22,7 +22,6 @@ func AddTodo(newTodo NewTodo, cookie objx.Map) {
 		_, err := db.Exec("insert into todo(todo) values('" + newTodo.Todo + "','" + name + "');")
 		if err != nil {
 			log.Fatalln(err)
-
 		}
 	}
 }
