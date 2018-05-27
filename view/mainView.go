@@ -1,7 +1,6 @@
 package view
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"simpleTodo/model"
@@ -11,13 +10,20 @@ import (
 )
 
 func ShowList(c *gin.Context) { //Getに対するレスポンス兼表示
-	if cookie, err := c.Cookie("simpletodo"); err == http.ErrNoCookie {
-		fmt.Println(err)
+	cookie := CookieCheck(c)
+	showTodos := model.Select(objx.MustFromBase64(cookie))
+	c.HTML(http.StatusOK, "index.html", showTodos)
+
+}
+
+func CookieCheck(c *gin.Context) string {
+	cookie, err := c.Cookie("simpletodo")
+	if err == http.ErrNoCookie {
 		c.Redirect(http.StatusSeeOther, "/login")
 	} else if err != nil {
 		log.Fatalln(err)
-	} else {
-		showTodos := model.Select(objx.MustFromBase64(cookie))
-		c.HTML(http.StatusOK, "index.html", showTodos)
 	}
+
+	return cookie
+
 }
