@@ -52,7 +52,7 @@ func Callback(c *gin.Context) {
 	}
 
 	cookieValue := objx.New(map[string]interface{}{
-		"Name": user.Name(),
+		"Id": user.AuthCode(),
 	}).MustBase64()
 
 	//c.SetCookie(name, value, maxAge, path, domain, secure, httpOnly)
