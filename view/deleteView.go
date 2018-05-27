@@ -5,13 +5,16 @@ import (
 	"simpleTodo/model"
 
 	"github.com/gin-gonic/gin"
+	"github.com/stretchr/objx"
 )
 
 func DeleteTodo(c *gin.Context) {
-	var delTodo model.DelTodo
-	if c.ShouldBind(&delTodo) == nil {
-		model.DeleteTodo(delTodo)
+	cookie := CookieCheck(c)
+	if cookie != "" {
+		var delTodo model.DelTodo
+		if c.ShouldBind(&delTodo) == nil {
+			model.DeleteTodo(delTodo, objx.MustFromBase64(cookie))
+		}
+		c.Redirect(http.StatusMovedPermanently, "/list")
 	}
-	c.Redirect(http.StatusMovedPermanently, "/list")
-
 }

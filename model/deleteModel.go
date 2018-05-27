@@ -3,13 +3,15 @@ package model
 import (
 	"log"
 	"strconv"
+
+	"github.com/stretchr/objx"
 )
 
 type DelTodo struct { //削除用
 	Delete []int `form:"delete[]"`
 }
 
-func DeleteTodo(delTodo DelTodo) {
+func DeleteTodo(delTodo DelTodo, cookie objx.Map) {
 	db := openDB()
 	defer db.Close()
 

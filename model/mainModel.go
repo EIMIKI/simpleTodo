@@ -4,9 +4,12 @@ import (
 	"database/sql"
 	"log"
 	"os"
+
+	"github.com/stretchr/objx"
 )
 
 type ShowTodo struct { //表示用
+	User objx.Map
 	Todo string
 	Id   int
 }
@@ -26,11 +29,12 @@ func openDB() *sql.DB { //データベースの接続
 	return db
 }
 
-func Select() []ShowTodo { //表示用データの作成
+func Select(cookie objx.Map) []ShowTodo { //表示用データの作成
 	showTodos := []ShowTodo{}
+	name := cookie["Name"].(string)
 	db := openDB()
 	defer db.Close()
-	rows, err := db.Query("select * from todo")
+	rows, err := db.Query("select todoid,todo from todo where user='" + name + "'")
 	if err != nil {
 		log.Fatalln(err)
 	}
