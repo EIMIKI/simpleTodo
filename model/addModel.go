@@ -19,7 +19,7 @@ func AddTodo(newTodo NewTodo, cookie objx.Map) {
 		if utf8.RuneCountInString(newTodo.Todo) > 255 {
 			newTodo.Todo = "error! : max number of charactors is 255"
 		}
-		_, err := db.Exec("insert into todo(todo) values('" + newTodo.Todo + "','" + name + "');")
+		_, err := db.Exec("insert into todo(todo,user) values('" + newTodo.Todo + "','" + name + "');")
 		if err != nil {
 			log.Fatalln(err)
 		}
