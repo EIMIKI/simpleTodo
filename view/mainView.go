@@ -1,6 +1,7 @@
 package view
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"simpleTodo/model"
@@ -11,7 +12,8 @@ import (
 
 func ShowList(c *gin.Context) { //Getに対するレスポンス兼表示
 	if cookie, err := c.Cookie("simpletodo"); err == http.ErrNoCookie {
-		c.Redirect(http.StatusMovedPermanently, "/login")
+		fmt.Println(err)
+		c.Redirect(http.StatusSeeOther, "/login")
 	} else if err != nil {
 		log.Fatalln(err)
 	} else {

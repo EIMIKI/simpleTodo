@@ -9,6 +9,7 @@ import (
 )
 
 type ShowTodo struct { //表示用
+	User objx.Map
 	Todo string
 	Id   int
 }
