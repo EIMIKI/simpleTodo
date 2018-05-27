@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"os"
 
@@ -44,6 +45,7 @@ func Select(cookie objx.Map) []ShowTodo { //表示用データの作成
 		if err != nil {
 			log.Fatalln(err)
 		}
+		fmt.Println(cookie["Name"])
 		showTodos = append(showTodos, showTodo)
 	}
 	return showTodos
