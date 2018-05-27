@@ -10,9 +10,11 @@ import (
 
 func AddTodo(c *gin.Context) {
 	cookie := CookieCheck(c)
-	var newTodo model.NewTodo
-	if c.ShouldBind(&newTodo) == nil {
-		model.AddTodo(newTodo, objx.MustFromBase64(cookie))
+	if cookie != "" {
+		var newTodo model.NewTodo
+		if c.ShouldBind(&newTodo) == nil {
+			model.AddTodo(newTodo, objx.MustFromBase64(cookie))
+		}
+		c.Redirect(http.StatusMovedPermanently, "/list")
 	}
-	c.Redirect(http.StatusMovedPermanently, "/list")
 }
