@@ -34,7 +34,7 @@ func Select(cookie objx.Map) []ShowTodo { //表示用データの作成
 	name := cookie["Name"].(string)
 	db := openDB()
 	defer db.Close()
-	rows, err := db.Query("select * from todo where user='" + name + "'")
+	rows, err := db.Query("select todoid,todo from todo where user='" + name + "'")
 	if err != nil {
 		log.Fatalln(err)
 	}
