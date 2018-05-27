@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"log"
 	"os"
+
+	"github.com/stretchr/objx"
 )
 
 type ShowTodo struct { //表示用
@@ -26,7 +28,7 @@ func openDB() *sql.DB { //データベースの接続
 	return db
 }
 
-func Select() []ShowTodo { //表示用データの作成
+func Select(cookie objx.Map) []ShowTodo { //表示用データの作成
 	showTodos := []ShowTodo{}
 	db := openDB()
 	defer db.Close()
