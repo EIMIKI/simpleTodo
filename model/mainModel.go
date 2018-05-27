@@ -2,7 +2,6 @@ package model
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 
@@ -32,9 +31,10 @@ func openDB() *sql.DB { //データベースの接続
 
 func Select(cookie objx.Map) []ShowTodo { //表示用データの作成
 	showTodos := []ShowTodo{}
+	name := cookie["Name"].(string)
 	db := openDB()
 	defer db.Close()
-	rows, err := db.Query("select * from todo")
+	rows, err := db.Query("select * from todo where user='" + name + "'")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -45,7 +45,6 @@ func Select(cookie objx.Map) []ShowTodo { //表示用データの作成
 		if err != nil {
 			log.Fatalln(err)
 		}
-		fmt.Println(cookie["Name"])
 		showTodos = append(showTodos, showTodo)
 	}
 	return showTodos
