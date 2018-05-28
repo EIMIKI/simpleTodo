@@ -4,6 +4,7 @@ Golangの学習過程でつくったもの。
 ## 必要なもの
 * Ginフレームワーク
 * gomniauth
+* objx
 * mysql
 * mysqlドライバー
 
